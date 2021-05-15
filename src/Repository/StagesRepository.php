@@ -36,15 +36,15 @@ class StagesRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Stages
+
+    public function  clientsCount(string $stage): int
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('count(s.id)')
+            ->andWhere('s.name = :val')
+            ->setParameter('val', $stage)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
+
 }

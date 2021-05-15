@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\StagesCreateAction;
+use App\Controller\StagesClientsCountAction;
 use App\Repository\StagesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,10 +16,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     collectionOperations: [
         'get',
-        'createStages'=>[
+        'post',
+        'stagesCount'=>[
             'method'=>'get',
-            'path'=>'stages/my',
-            'controller'=>StagesCreateAction::class
+            'path'=>'stages/count',
+            'controller'=>StagesClientsCountAction::class
         ]
     ],
     itemOperations: ['get','delete'],
