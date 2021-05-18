@@ -46,14 +46,14 @@ class Clients
      * @ORM\ManyToOne(targetEntity=Stages::class, inversedBy="clients")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[Groups(['clients:read'])]
+    #[Groups(['clients:read','clients:write'])]
     private $stage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Services::class, inversedBy="clients")
      * @ORM\JoinColumn(nullable=false)
      */
-    #[Groups(['clients:read'])]
+    #[Groups(['clients:read','clients:write'])]
     private $serviceType;
 
     public function getId(): ?int
