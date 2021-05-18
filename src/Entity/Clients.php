@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\ClientsClientsCountAction;
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -12,18 +11,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=ClientsRepository::class)
  */
 #[ApiResource(
-    collectionOperations: [
-    'get',
-    'post',
-    'clientsCount'=>[
-        'method'=>'get',
-        'path'=>'clients/count',
-        'controller'=>ClientsClientsCountAction::class
-    ]
-],
-    itemOperations: ['get','delete'],
-    denormalizationContext: ['groups'=>['stages:write']],
-    normalizationContext: ['groups'=>['stages:read']]
+    denormalizationContext: ['groups'=>['clients:write']],
+    normalizationContext: ['groups'=>['clients:read']]
 )]
 class Clients
 {

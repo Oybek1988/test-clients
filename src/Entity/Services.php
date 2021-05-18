@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\StagesClientsCountAction;
 use App\Repository\ServicesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,21 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity( repositoryClass=ServicesRepository::class)
+ * @ORM\Entity(repositoryClass=ServicesRepository::class)
  */
 #[ApiResource(
-    collectionOperations: [
-    'get',
-    'post',
-    'servicesCount'=>[
-        'method'=>'get',
-        'path'=>'services/count',
-        'controller'=>StagesClientsCountAction::class
-    ]
-],
-    itemOperations: ['get','delete'],
-    denormalizationContext: ['groups'=>['stages:write']],
-    normalizationContext: ['groups'=>['stages:read']])]
+    denormalizationContext: ['groups'=>['services:write']],
+    normalizationContext: ['groups'=>['services:read']])]
 class Services
 {
     /**
