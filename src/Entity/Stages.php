@@ -48,7 +48,7 @@ class Stages
     /**
      * @ORM\OneToMany(targetEntity=Clients::class, mappedBy="stage")
      */
-    #[Groups(['stages:read',])]
+    #[Groups(['stages:read'])]
     private $clients;
 
     public function __construct()
