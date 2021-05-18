@@ -28,7 +28,7 @@ class Services
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['services:read','service:write'])]
+    #[Groups(['services:read','services:write'])]
     private $name;
 
     /**
