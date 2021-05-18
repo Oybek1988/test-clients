@@ -41,7 +41,8 @@ class StagesRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s')
             ->select('count(s.id)')
-            ->andWhere('s.name = :val')
+            ->innerJoin('s.clients','c')
+            ->andWhere('s.name = :val' )
             ->setParameter('val', $stage)
             ->getQuery()
             ->getSingleScalarResult();
