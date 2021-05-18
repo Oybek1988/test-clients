@@ -3,13 +3,28 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\ClientsClientsCountAction;
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ClientsRepository::class)
  */
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+    'get',
+    'post',
+    'clientsCount'=>[
+        'method'=>'get',
+        'path'=>'clients/count',
+        'controller'=>ClientsClientsCountAction::class
+    ]
+],
+    itemOperations: ['get','delete'],
+    denormalizationContext: ['groups'=>['stages:write']],
+    normalizationContext: ['groups'=>['stages:read']]
+)]
 class Clients
 {
     /**
@@ -17,33 +32,39 @@ class Clients
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(['clients:read'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['clients:read','clients:write'])]
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['clients:read','clients:write'])]
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(['clients:read','clients:write'])]
     private $companyName;
 
     /**
      * @ORM\ManyToOne(targetEntity=Stages::class, inversedBy="clients")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups(['clients:read'])]
     private $stage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Services::class, inversedBy="clients")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups(['clients:read'])]
     private $serviceType;
 
     public function getId(): ?int
